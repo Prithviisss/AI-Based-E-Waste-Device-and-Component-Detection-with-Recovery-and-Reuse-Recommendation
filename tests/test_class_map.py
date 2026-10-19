@@ -18,7 +18,7 @@ CLASS_MAP_PATH = Path(__file__).resolve().parents[1] / "src" / "class_map.yaml"
 
 @pytest.fixture(scope="module")
 def class_map():
-    with open(CLASS_MAP_PATH) as f:
+    with open(CLASS_MAP_PATH, encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 

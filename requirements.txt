@@ -11,7 +11,7 @@ pytorch-grad-cam>=1.5.0
 mcp>=1.0.0
 
 # Optimization
-pulp>=2.7.0
+pulp>=2.7.0,<3.0.0
 
 # Data / utils
 numpy>=1.24.0
