@@ -1,0 +1,16 @@
+data/
+*.pt
+*.pth
+*.onnx
+reports/runs/
+__pycache__/
+*.pyc
+.env
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.idea/
+.vscode/
+*.log

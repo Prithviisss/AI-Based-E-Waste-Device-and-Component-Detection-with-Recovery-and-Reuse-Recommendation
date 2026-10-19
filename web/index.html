@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="E-Waste RecoveryAI — upload a photo of electronic waste to get AI-powered device identification and recovery recommendations.">
+  <title>E-Waste RecoveryAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/web/app.css">
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">♻</span>
+        <span class="logo-text">E-Waste <strong>RecoveryAI</strong></span>
+      </div>
+      <nav class="nav">
+        <a href="#upload">Analyze</a>
+        <a href="#how">How it works</a>
+        <a href="/metrics" target="_blank">Metrics</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Hero ───────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">AI-Powered • Rule-Based Recovery • Open Datasets</div>
+      <h1>Identify & Recover<br><span class="gradient-text">E-Waste Components</span></h1>
+      <p class="hero-sub">
+        Upload a photo of any electronic device. Our AI identifies it, detects internal
+        components, and recommends the optimal recovery or reuse pathway — instantly.
+      </p>
+      <a href="#upload" class="btn-primary">Start Analyzing →</a>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="orbit orbit-1"></div>
+      <div class="orbit orbit-2"></div>
+      <div class="orbit orbit-3"></div>
+      <div class="core">♻</div>
+    </div>
+  </section>
+
+  <!-- ── Upload ─────────────────────────────────────────────────── -->
+  <section class="section" id="upload">
+    <div class="container">
+      <h2 class="section-title">Analyze Your Device</h2>
+      <p class="section-sub">Drop an image of your e-waste item and optionally fill in the details below.</p>
+
+      <div class="card upload-card">
+        <!-- Drop zone -->
+        <div class="dropzone" id="dropzone">
+          <div class="dz-icon">📷</div>
+          <p class="dz-text">Drag &amp; drop your image here</p>
+          <p class="dz-sub">or</p>
+          <label for="file-input" class="btn-secondary">Choose File</label>
+          <input id="file-input" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+          <p class="dz-hint">JPEG · PNG · WebP — max 10 MB</p>
+        </div>
+
+        <!-- Preview -->
+        <div class="preview-wrap hidden" id="preview-wrap">
+          <img id="preview-img" src="" alt="Preview">
+          <button class="btn-ghost" id="remove-img">✕ Remove</button>
+        </div>
+
+        <!-- Fields -->
+        <div class="fields">
+          <div class="field-group">
+            <label for="age-input">Device age (years)</label>
+            <input id="age-input" type="number" min="0" max="50" placeholder="e.g. 5">
+          </div>
+          <div class="field-group">
+            <label for="working-select">Working status</label>
+            <select id="working-select">
+              <option value="">Unknown</option>
+              <option value="true">Yes — it works</option>
+              <option value="false">No — broken</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="budget-input">Recovery budget (USD)</label>
+            <input id="budget-input" type="number" min="0" step="0.5" value="20" placeholder="20.00">
+          </div>
+        </div>
+
+        <button class="btn-primary full-width" id="analyze-btn" disabled>
+          <span id="btn-label">Analyze Device</span>
+          <span class="spinner hidden" id="spinner"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Results ────────────────────────────────────────────────── -->
+  <section class="section hidden" id="results-section">
+    <div class="container">
+      <h2 class="section-title">Analysis Results</h2>
+      <div id="results-inner"></div>
+    </div>
+  </section>
+
+  <!-- ── How it works ───────────────────────────────────────────── -->
+  <section class="section alt" id="how">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Device Classification</h3>
+          <p>EfficientNet-B0 identifies the device type from 12 categories trained on the Kaggle E-Waste dataset.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Component Detection</h3>
+          <p>Two separate YOLOv8 detectors run in parallel: one for PCB parts, one for RAM &amp; SSD modules.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Rule-Based Recovery</h3>
+          <p>A knowledge base with cited figures (UN, WEEE, iFixit) determines the optimal recovery route per component.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>MILP Optimization</h3>
+          <p>Integer programming selects the best recovery pathways within your budget to maximise value or CO₂ savings.</p>
+        </div>
+      </div>
+      <div class="disclaimer">
+        ⚠ Recovery and reuse potential is determined by a knowledge base — not a trained model.
+        Real-world accuracy may be lower than lab metrics. Always consult a certified e-waste recycler.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <p>E-Waste RecoveryAI &nbsp;·&nbsp; Datasets: Kaggle, HuggingFace, Roboflow &nbsp;·&nbsp; For research use only</p>
+    </div>
+  </footer>
+
+  <script src="/web/app.js"></script>
+</body>
+</html>

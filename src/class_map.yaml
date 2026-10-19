@@ -1,0 +1,215 @@
+# src/class_map.yaml
+# ──────────────────────────────────────────────────────────────────────────────
+# Maps every dataset label to a knowledge-base (KB) key.
+# unmapped_policy: report_in_output  ← never silently drop unknown labels
+#
+# Format:
+#   source   : dataset1 | dataset2 | dataset3 | fallback
+#   label    : original label from that dataset
+#   kb_key   : key used in the MCP knowledge base
+#   note     : required for ambiguous or inferred mappings
+# ──────────────────────────────────────────────────────────────────────────────
+
+unmapped_policy: report_in_output
+
+mappings:
+
+  # ── Dataset 1  (Kaggle classification) ─────────────────────────────────────
+  - source: dataset1
+    label: battery
+    kb_key: battery
+    note: standalone battery / battery pack (device-level; distinct from on-board cell)
+
+  - source: dataset1
+    label: computer
+    kb_key: computer
+
+  - source: dataset1
+    label: keyboard
+    kb_key: keyboard
+
+  - source: dataset1
+    label: microwave
+    kb_key: microwave
+
+  - source: dataset1
+    label: mobile
+    kb_key: mobile
+
+  - source: dataset1
+    label: mouse
+    kb_key: mouse
+
+  - source: dataset1
+    label: PCB
+    kb_key: pcb
+    note: bare board classified at device level; pipeline will also run PCB detector
+
+  - source: dataset1
+    label: player
+    kb_key: player
+
+  - source: dataset1
+    label: printer
+    kb_key: printer
+
+  - source: dataset1
+    label: speaker
+    kb_key: speaker
+
+  - source: dataset1
+    label: washing_machine
+    kb_key: washing_machine
+
+  - source: dataset1
+    label: TV
+    kb_key: tv
+
+  # ── Dataset 2  (Hugging Face PCB Object Detection — 21 classes) ────────────
+  # Full class list to be verified from data.yaml; placeholders for classes
+  # not yet confirmed are marked verify:true
+
+  - source: dataset2
+    label: battery
+    kb_key: battery
+    note: on-board cell/holder on a PCB — different from dataset1 standalone battery; keep source field
+
+  - source: dataset2
+    label: capacitor
+    kb_key: pcb
+    note: harvestable component; rolls up under pcb
+
+  - source: dataset2
+    label: chip
+    kb_key: ic
+    note: harvestable IC
+
+  - source: dataset2
+    label: ic
+    kb_key: ic
+    note: harvestable IC
+
+  - source: dataset2
+    label: connector
+    kb_key: connector
+    note: harvestable connector
+
+  - source: dataset2
+    label: heatsink
+    kb_key: aluminium
+    note: aluminium inferred from heatsink material — aluminium is NOT directly detected
+
+  - source: dataset2
+    label: resistor
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: transistor
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: diode
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: inductor
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: transformer
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: fuse
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: relay
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: switch
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: led
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: crystal
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: coil
+    kb_key: pcb
+    note: rolls up under pcb
+
+  - source: dataset2
+    label: socket
+    kb_key: connector
+    note: harvestable socket/connector
+
+  - source: dataset2
+    label: port
+    kb_key: connector
+    note: harvestable I/O port
+
+  - source: dataset2
+    label: screw
+    kb_key: metal
+    note: generic fastener metal
+
+  - source: dataset2
+    label: pcb
+    kb_key: pcb
+    note: board itself as a detected region
+
+  # ── Dataset 3  (Roboflow RAM-SSD-Detector) ──────────────────────────────────
+  - source: dataset3
+    label: ram
+    kb_key: ram
+
+  - source: dataset3
+    label: SSD
+    kb_key: ssd
+
+  - source: dataset3
+    label: objects
+    kb_key: UNMAPPED
+    note: >
+      Inspect 20 random images annotated as 'objects' before training.
+      If heterogeneous catch-all → keep UNMAPPED and exclude from KB routing.
+      If meaningful grouping → update kb_key accordingly. See docs/datasets.md.
+
+  # ── Fallback dataset  (Roboflow Components 2 — used if dataset3 mAP≈0) ─────
+  - source: fallback
+    label: CPU
+    kb_key: cpu
+
+  - source: fallback
+    label: DISK
+    kb_key: storage_drive
+    note: maps to generic storage; cannot distinguish HDD from SSD without further detection
+
+  - source: fallback
+    label: GPU
+    kb_key: gpu
+
+  - source: fallback
+    label: Motherboard
+    kb_key: pcb
+    note: motherboard treated as pcb for KB routing
+
+  - source: fallback
+    label: PSU
+    kb_key: psu
