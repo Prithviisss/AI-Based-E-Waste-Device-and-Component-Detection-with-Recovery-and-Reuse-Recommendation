@@ -18,7 +18,11 @@ from pathlib import Path
 from src.utils.metrics_writer import update_section
 
 
-def evaluate(model_path: Path, dataset_yaml: Path) -> dict:
+def evaluate(model_path: Path = None, dataset_yaml: Path = None, weights: Path = None) -> dict:
+    if model_path is None and weights is not None:
+        model_path = weights
+    if model_path is None:
+        raise ValueError("model_path (or weights) must be provided")
     try:
         from ultralytics import YOLO
     except ImportError:
