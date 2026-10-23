@@ -36,12 +36,17 @@ def read_dataset_yaml(raw_dir: Path) -> Dict:
         if p.exists():
             with open(p) as f:
                 return yaml.safe_load(f)
+    # Search recursively if the archive was extracted into a subfolder
+    for p in list(raw_dir.rglob("data.yaml")) + list(raw_dir.rglob("dataset.yaml")):
+        if p.exists():
+            with open(p) as f:
+                return yaml.safe_load(f)
     raise FileNotFoundError(f"No data.yaml / dataset.yaml found in {raw_dir}")
 
 
 def collect_image_label_pairs(raw_dir: Path) -> List[Tuple[Path, Path]]:
     """Return (image_path, label_path) pairs from a YOLO-format directory."""
-    img_exts = {".jpg", ".jpeg", ".png", ".bmp"}
+    img_exts = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
     pairs = []
     for img_path in sorted(raw_dir.rglob("*")):
         if img_path.suffix.lower() not in img_exts:
@@ -50,6 +55,8 @@ def collect_image_label_pairs(raw_dir: Path) -> List[Tuple[Path, Path]]:
         label_candidates = [
             img_path.with_suffix(".txt"),
             img_path.parent.parent / "labels" / img_path.with_suffix(".txt").name,
+            img_path.parent.parent / "labels" / img_path.parent.name / img_path.with_suffix(".txt").name,
+            img_path.parent / (img_path.stem + ".txt"),
         ]
         label_path = next((lp for lp in label_candidates if lp.exists()), None)
         if label_path:

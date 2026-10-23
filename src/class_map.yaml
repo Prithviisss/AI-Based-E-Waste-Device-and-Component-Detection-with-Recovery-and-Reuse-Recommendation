@@ -145,6 +145,11 @@ mappings:
     note: rolls up under pcb
 
   - source: dataset2
+    label: potentiometer
+    kb_key: pcb
+    note: variable resistor / potentiometer; rolls up under pcb
+
+  - source: dataset2
     label: crystal
     kb_key: pcb
     note: rolls up under pcb
