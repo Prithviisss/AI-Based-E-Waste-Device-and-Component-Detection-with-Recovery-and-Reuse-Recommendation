@@ -1,0 +1,83 @@
+{
+  "seed": 42,
+  "_updated": "2026-10-23T06:27:23.897327+00:00",
+  "classifier": {
+    "n_test": 416,
+    "accuracy": 0.980769,
+    "macro_f1": 0.980532,
+    "per_class_f1": {
+      "Battery": 1.0,
+      "Keyboard": 1.0,
+      "Microwave": 0.948718,
+      "Mobile": 0.988506,
+      "Mouse": 0.988235,
+      "PCB": 0.987654,
+      "Player": 0.972973,
+      "Printer": 0.966292,
+      "Television": 0.964706,
+      "Washing Machine": 0.988235
+    },
+    "confusion_matrix_path": "reports/figures/classifier_confusion.png"
+  },
+  "detector_pcb": {
+    "model": "/content/ewaste/reports/runs/detect_pcb/train/weights/best.pt",
+    "dataset": "dataset2",
+    "map50": 0.977336,
+    "map50_95": 0.638743,
+    "precision": 0.962389,
+    "recall": 0.948533,
+    "per_class": {
+      "IC": {
+        "ap50": 0.9755102040816326,
+        "ap50_95": 0.7374541629226249
+      },
+      "LED": {
+        "ap50": 0.9890816339953628,
+        "ap50_95": 0.5814930104933757
+      },
+      "capacitor": {
+        "ap50": 0.9811790255858973,
+        "ap50_95": 0.574882030061469
+      },
+      "connector": {
+        "ap50": 0.982248900637179,
+        "ap50_95": 0.7596132363699484
+      },
+      "diode": {
+        "ap50": 0.9604881303212415,
+        "ap50_95": 0.5621886467950641
+      },
+      "potentiometer": {
+        "ap50": 0.995,
+        "ap50_95": 0.766861111111111
+      },
+      "resistor": {
+        "ap50": 0.9624146584002894,
+        "ap50_95": 0.49792000123560587
+      },
+      "transistor": {
+        "ap50": 0.9727619140119137,
+        "ap50_95": 0.6295323948751677
+      }
+    }
+  },
+  "detector_ramssd": {
+    "model": "/content/ewaste/reports/runs/detect_ramssd/train/weights/best.pt",
+    "dataset": "dataset3",
+    "fallback_used": false,
+    "map50": 0.816251,
+    "map50_95": 0.561633,
+    "precision": 0.836895,
+    "recall": 0.789884,
+    "per_class": {
+      "SSD": {
+        "ap50": 0.7357142857142857,
+        "ap50_95": 0.53175
+      },
+      "ram": {
+        "ap50": 0.8967878787878787,
+        "ap50_95": 0.5915169415155801
+      }
+    }
+  }
+}

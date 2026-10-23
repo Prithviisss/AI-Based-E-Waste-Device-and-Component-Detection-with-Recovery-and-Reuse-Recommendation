@@ -55,7 +55,7 @@ def load_class_map(path: Path = CLASS_MAP_PATH) -> Dict[str, str]:
     Returns a dict keyed by 'source:label' → kb_key.
     Labels with kb_key == 'UNMAPPED' are kept so the pipeline can report them.
     """
-    with open(path) as f:
+    with open(path, encoding="utf-8") as f:
         data = yaml.safe_load(f)
     mapping = {}
     for entry in data.get("mappings", []):
@@ -78,6 +78,14 @@ def resolve_kb_key(
     for k, v in mapping.items():
         if k.split(":", 1)[1] == label:
             return v
+    # Normalized & case-insensitive fallback (e.g. "Television" -> "tv", "Washing Machine" -> "washing_machine")
+    norm_label = label.lower().strip().replace(" ", "_")
+    for k, v in mapping.items():
+        k_label = k.split(":", 1)[1].lower().strip().replace(" ", "_")
+        if k_label == norm_label:
+            return v
+    if norm_label in ("television", "tv"):
+        return "tv"
     return None
 
 
@@ -88,7 +96,7 @@ def resolve_kb_key(
 def run_classifier(
     image_path: Path,
     ckpt: Path = CLASSIFIER_CKPT,
-    num_classes: int = 12,
+    num_classes: Optional[int] = None,
 ) -> tuple[str, float]:
     """Returns (predicted_label, confidence)."""
     if not ckpt.exists():
@@ -99,9 +107,30 @@ def run_classifier(
     from src.classify.train import build_model
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    state_dict = torch.load(ckpt, map_location=device)
+
+    # Auto-detect number of classes from state_dict
+    if num_classes is None:
+        if "classifier.1.weight" in state_dict:
+            num_classes = state_dict["classifier.1.weight"].shape[0]
+        else:
+            num_classes = 10
+
     model = build_model(num_classes, pretrained=False)
-    model.load_state_dict(torch.load(ckpt, map_location=device))
+    model.load_state_dict(state_dict)
     model.to(device).eval()
+
+    # Determine class names list matching trained checkpoint
+    classes = CLASSIFIER_CLASSES
+    try:
+        from src.utils.metrics_writer import get_section
+        m = get_section("classifier")
+        if "classes" in m and len(m["classes"]) == num_classes:
+            classes = m["classes"]
+        elif "per_class_f1" in m and len(m["per_class_f1"]) == num_classes:
+            classes = list(m["per_class_f1"].keys())
+    except Exception:
+        pass
 
     transform = T.Compose([
         T.Resize(256), T.CenterCrop(224), T.ToTensor(),
@@ -115,7 +144,7 @@ def run_classifier(
         probs  = torch.softmax(logits, dim=1)
         conf, pred = probs.max(dim=1)
 
-    label = CLASSIFIER_CLASSES[pred.item()] if pred.item() < len(CLASSIFIER_CLASSES) else "unknown"
+    label = classes[pred.item()] if pred.item() < len(classes) else "unknown"
     return label, round(float(conf.item()), 4)
 
 

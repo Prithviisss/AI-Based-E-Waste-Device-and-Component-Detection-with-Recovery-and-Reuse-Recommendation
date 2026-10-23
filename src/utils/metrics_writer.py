@@ -15,7 +15,7 @@ METRICS_PATH = Path(__file__).resolve().parents[2] / "reports" / "metrics.json"
 
 def _load() -> Dict[str, Any]:
     if METRICS_PATH.exists():
-        with open(METRICS_PATH, "r") as f:
+        with open(METRICS_PATH, "r", encoding="utf-8") as f:
             return json.load(f)
     return {"seed": 42, "_updated": None, "classifier": {}, "detector_pcb": {}, "detector_ramssd": {}}
 
@@ -23,7 +23,7 @@ def _load() -> Dict[str, Any]:
 def _save(data: Dict[str, Any]) -> None:
     METRICS_PATH.parent.mkdir(parents=True, exist_ok=True)
     data["_updated"] = datetime.now(timezone.utc).isoformat()
-    with open(METRICS_PATH, "w") as f:
+    with open(METRICS_PATH, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
     print(f"[metrics] Saved → {METRICS_PATH}")
 
