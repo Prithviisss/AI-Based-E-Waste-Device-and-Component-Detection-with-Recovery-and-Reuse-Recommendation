@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Waste RecoveryAI — Report 531c7839</title>
+  <style>
+    :root {
+      --primary: #00c896;
+      --bg: #0f1117;
+      --card: #1a1d27;
+      --border: #2a2d3a;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --danger: #f87171;
+      --warn: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; padding: 2rem; line-height: 1.6; }
+    h1 { color: var(--primary); font-size: 1.8rem; margin-bottom: 0.25rem; }
+    h2 { color: var(--primary); font-size: 1.1rem; margin: 1.5rem 0 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+    .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; margin-bottom: 1rem; }
+    .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+    .badge-green { background: #064e3b; color: var(--primary); }
+    .badge-yellow { background: #451a03; color: var(--warn); }
+    .badge-red { background: #450a0a; color: var(--danger); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th { background: #12151f; color: var(--muted); text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+    td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+    tr:hover td { background: #1e2130; }
+    .conf-bar { height: 6px; border-radius: 3px; background: #1e2130; margin-top: 4px; }
+    .conf-fill { height: 100%; border-radius: 3px; background: var(--primary); }
+    .warn-box { background: #451a03; border: 1px solid var(--warn); border-radius: 8px; padding: 0.8rem; color: var(--warn); font-size: 0.85rem; margin-top: 0.5rem; }
+    .heatmap-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-top: 0.5rem; }
+    .heatmap-grid img { width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+    .limitations { background: #12151f; border-left: 3px solid var(--warn); padding: 1rem; border-radius: 0 8px 8px 0; font-size: 0.85rem; color: var(--muted); }
+    .footer { margin-top: 2rem; color: var(--muted); font-size: 0.78rem; text-align: center; }
+    .status-optimal { color: var(--primary); font-weight: 600; }
+    .status-infeasible { color: var(--danger); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>♻ E-Waste RecoveryAI</h1>
+  <div class="meta">Run ID: <code>531c7839</code> &nbsp;|&nbsp; 2026-10-24 17:13 UTC</div>
+
+  <div class="card">
+    <h2>Device Classification</h2>
+    <p><strong>Identified device:</strong> WASHING MACHINE
+      <span class="badge badge-green">45.7% confidence</span>
+    </p>
+    <div class="conf-bar"><div class="conf-fill" style="width:45.7%"></div></div>
+  </div>
+
+  
+
+  
+
+  
+  <div class="card">
+    <h2>Optimized Recovery Pathway</h2>
+    <p>Status: <span class="status-optimal">OPTIMAL</span></p>
+    
+    <table style="margin-top:0.75rem;max-width:400px">
+      <tr><th>Selected components</th><td>washing_machine</td></tr>
+      <tr><th>Total value</th><td>$10.0</td></tr>
+      <tr><th>Total cost</th><td>$15.0</td></tr>
+      <tr><th>Total CO₂ saved</th><td>20.0 kg</td></tr>
+    </table>
+    
+    
+  </div>
+  
+
+  
+
+  <div class="card">
+    <h2>Limitations</h2>
+    <div class="limitations">
+      Reuse and recovery potential are determined by a knowledge base because no public dataset provides these labels.
+      Visible condition is limited to a low-confidence manual-inspection flag.
+      RAM and SSD detection is trained on a very small public dataset and is expected to be weaker than PCB part detection.
+      Public images are cleaner than real e-waste photos, so real-world accuracy may be lower.
+      Aluminium is inferred, not detected.<br><br>
+      <em>Future work: collect an annotated condition dataset and train XGBoost/Random Forest with SHAP to replace the rules.</em>
+    </div>
+  </div>
+
+  <div class="footer">E-Waste RecoveryAI &nbsp;|&nbsp; Results are advisory only — always consult a certified e-waste recycler.</div>
+</body>
+</html>

@@ -115,7 +115,7 @@ function renderResults(d) {
         </div>
         ${d.optimized_pathways?.status === 'optimal' ? `
           <p style="font-size:0.85rem;margin-top:0.5rem">
-            💰 $${d.optimized_pathways.total_value_usd} recovered &nbsp;·&nbsp;
+            💰 ₹${Math.round((d.optimized_pathways.total_value_usd || 0) * 83).toLocaleString('en-IN')} recovered &nbsp;·&nbsp;
             🌱 ${d.optimized_pathways.total_co2_saved_kg} kg CO₂ saved
           </p>
           <p style="font-size:0.78rem;color:var(--muted)">Selected: ${(d.optimized_pathways.selected||[]).join(', ')||'—'}</p>
@@ -131,17 +131,16 @@ function renderResults(d) {
       <div class="result-table-wrap">
         <table>
           <thead><tr>
-            <th>Label</th><th>KB Key</th><th>Confidence</th><th>Route</th>
-            <th>Value (USD)</th><th>CO₂ Saved</th>
+            <th>Component</th><th>Confidence</th><th>Action</th>
+            <th>Value (INR)</th><th>CO₂ Saved</th>
           </tr></thead>
           <tbody>
             ${d.detections.map(det => `
               <tr>
                 <td>${det.label}</td>
-                <td><code style="font-size:0.8rem">${det.kb_key || '<span style="color:var(--warn)">unmapped</span>'}</code></td>
                 <td>${(det.confidence*100).toFixed(1)}%</td>
                 <td>${routeBadge(det.route)}</td>
-                <td>${det.estimated_value_usd != null ? '$'+det.estimated_value_usd : '—'}</td>
+                <td>${det.estimated_value_usd != null ? '₹' + Math.round(det.estimated_value_usd * 83).toLocaleString('en-IN') : '—'}</td>
                 <td>${det.co2_saved_kg != null ? det.co2_saved_kg+' kg' : '—'}</td>
               </tr>`).join('')}
           </tbody>

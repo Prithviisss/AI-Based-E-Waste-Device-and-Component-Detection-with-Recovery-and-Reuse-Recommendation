@@ -50,6 +50,10 @@ app.add_middleware(
 # Serve static reports and web UI
 app.mount("/reports",  StaticFiles(directory=str(REPORTS_DIR)), name="reports")
 app.mount("/web",      StaticFiles(directory="web"),             name="web")
+if Path("web/assets").exists():
+    app.mount("/assets", StaticFiles(directory="web/assets"), name="assets")
+if Path("demo").exists():
+    app.mount("/demo",   StaticFiles(directory="demo"),       name="demo")
 
 
 @app.get("/", response_class=HTMLResponse)

@@ -156,7 +156,7 @@ def run_detector(
     image_path: Path,
     model_path: Path,
     source_tag: str,
-    conf_threshold: float = 0.25,
+    conf_threshold: float = 0.35,
 ) -> List[Dict[str, Any]]:
     """
     Returns list of dicts: {label, confidence, bbox, source}.
@@ -219,8 +219,20 @@ def run(
     print(f"[pipeline] Device: {device_label} (conf={device_conf:.3f})")
 
     # ── 3. Detect (two separate detectors — never merged) ─────────────────────
-    pcb_dets    = run_detector(image_path, pcb_model,    source_tag="dataset2")
-    ramssd_dets = run_detector(image_path, ramssd_model, source_tag="dataset3")
+    # Context-aware filter: Peripherals & non-computing appliances do not have modular RAM/SSD
+    norm_dev = device_label.lower().strip().replace(" ", "_")
+    ramssd_incompatible = norm_dev in {
+        "keyboard", "mouse", "battery", "washing_machine", "microwave", "speaker", "tv"
+    }
+
+    pcb_dets = run_detector(image_path, pcb_model, source_tag="dataset2", conf_threshold=0.35)
+
+    if ramssd_incompatible:
+        print(f"[pipeline] Suppressing RAM/SSD detector for peripheral/appliance: {device_label}")
+        ramssd_dets = []
+    else:
+        ramssd_dets = run_detector(image_path, ramssd_model, source_tag="dataset3", conf_threshold=0.40)
+
     all_dets    = pcb_dets + ramssd_dets
     print(f"[pipeline] Detections: {len(pcb_dets)} PCB + {len(ramssd_dets)} RAM/SSD")
 
