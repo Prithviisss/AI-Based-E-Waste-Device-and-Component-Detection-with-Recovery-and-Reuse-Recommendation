@@ -141,7 +141,10 @@ def run_classifier(
 
     with torch.no_grad():
         logits = model(tensor)
-        probs  = torch.softmax(logits, dim=1)
+        # Temperature scaling calibration (T=2.2) to prevent overconfident logit saturation (100% certainty)
+        temperature = 2.2
+        calibrated_logits = logits / temperature
+        probs  = torch.softmax(calibrated_logits, dim=1)
         conf, pred = probs.max(dim=1)
 
     label = classes[pred.item()] if pred.item() < len(classes) else "unknown"

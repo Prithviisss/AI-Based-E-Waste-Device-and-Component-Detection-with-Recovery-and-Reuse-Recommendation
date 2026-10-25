@@ -645,25 +645,41 @@
   margin-top: 0.1rem;
 }
 
-/* ── Valuation Grid ────────────────────────────────────────── */
-.value-impact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* ── Valuation Section ─────────────────────────────────────── */
+.valuation-section {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
   margin-top: 0.5rem;
 }
 
-@media (max-width: 600px) {
-  .value-impact-grid {
+.val-main-banner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 650px) {
+  .val-main-banner {
     grid-template-columns: 1fr;
   }
 }
 
-.value-item {
+.val-primary-box {
   background-color: var(--bg-card-subtle);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  padding: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.val-eco-box {
+  background-color: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -676,7 +692,7 @@
 }
 
 .val-number {
-  font-size: 1.75rem;
+  font-size: 1.85rem;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -689,10 +705,65 @@
   color: var(--color-blue-light);
 }
 
+.val-range-tag {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+  font-variant-numeric: tabular-nums;
+}
+
 .val-hint {
-  font-size: 0.75rem;
+  font-size: 0.775rem;
   color: var(--text-muted);
   margin-top: 0.15rem;
+}
+
+/* ── Resale vs Scrap Benchmarks Row ────────────────────────── */
+.val-benchmarks-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 650px) {
+  .val-benchmarks-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.val-benchmark-item {
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.benchmark-title {
+  font-size: 0.775rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.benchmark-val {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.benchmark-val.green {
+  color: var(--color-green-light);
+}
+
+.benchmark-val.amber {
+  color: var(--color-amber-light);
+}
+
+.benchmark-sub {
+  font-size: 0.725rem;
+  color: var(--text-muted);
 }
 
 /* ── Components Detected Card ──────────────────────────────── */

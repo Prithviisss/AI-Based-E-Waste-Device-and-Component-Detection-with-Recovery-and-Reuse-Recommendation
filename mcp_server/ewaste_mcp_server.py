@@ -69,10 +69,10 @@ KNOWLEDGE_BASE: Dict[str, Dict[str, Any]] = {
         "salvageable": True,
         "hazardous": True,
         "hazard_note": "Lead solder, brominated flame retardants",
-        "resale_value_usd": 5.00,
-        "material_value_usd": 3.50,
+        "resale_value_usd": 25.00,
+        "material_value_usd": 10.00,
         "recovery_cost_usd": 3.00,
-        "co2_saved_direct_reuse_kg": 1.50,
+        "co2_saved_direct_reuse_kg": 2.50,
         "co2_saved_material_kg": 2.00,
         "materials": ["gold", "copper", "silver", "palladium"],
     },
@@ -153,38 +153,38 @@ KNOWLEDGE_BASE: Dict[str, Dict[str, Any]] = {
         "salvageable": True,
         "hazardous": True,
         "hazard_note": "Battery, rare earths",
-        "resale_value_usd": 25.00,
-        "material_value_usd": 5.00,
-        "recovery_cost_usd": 5.00,
+        "resale_value_usd": 65.00,
+        "material_value_usd": 10.00,
+        "recovery_cost_usd": 6.00,
         "co2_saved_direct_reuse_kg": 45.00,
-        "co2_saved_material_kg": 10.00,
+        "co2_saved_material_kg": 12.00,
         "materials": ["gold", "silver", "cobalt", "rare_earths"],
     },
     "computer": {
         "salvageable": True,
         "hazardous": True,
-        "resale_value_usd": 50.00,
-        "material_value_usd": 8.00,
-        "recovery_cost_usd": 8.00,
+        "resale_value_usd": 120.00,
+        "material_value_usd": 18.00,
+        "recovery_cost_usd": 12.00,
         "co2_saved_direct_reuse_kg": 300.00,
-        "co2_saved_material_kg": 30.00,
+        "co2_saved_material_kg": 35.00,
         "materials": ["gold", "copper", "aluminium", "steel"],
     },
     "keyboard": {
-        "salvageable": False,
+        "salvageable": True,
         "hazardous": False,
-        "resale_value_usd": 2.00,
-        "material_value_usd": 0.50,
+        "resale_value_usd": 8.00,
+        "material_value_usd": 1.50,
         "recovery_cost_usd": 1.00,
         "co2_saved_direct_reuse_kg": 0.50,
         "co2_saved_material_kg": 0.20,
         "materials": ["plastic", "copper"],
     },
     "mouse": {
-        "salvageable": False,
+        "salvageable": True,
         "hazardous": False,
-        "resale_value_usd": 1.50,
-        "material_value_usd": 0.30,
+        "resale_value_usd": 6.00,
+        "material_value_usd": 1.00,
         "recovery_cost_usd": 0.80,
         "co2_saved_direct_reuse_kg": 0.30,
         "co2_saved_material_kg": 0.10,
@@ -194,61 +194,61 @@ KNOWLEDGE_BASE: Dict[str, Dict[str, Any]] = {
         "salvageable": True,
         "hazardous": True,
         "hazard_note": "Toner cartridges",
-        "resale_value_usd": 15.00,
-        "material_value_usd": 3.00,
+        "resale_value_usd": 35.00,
+        "material_value_usd": 8.00,
         "recovery_cost_usd": 6.00,
         "co2_saved_direct_reuse_kg": 30.00,
-        "co2_saved_material_kg": 8.00,
+        "co2_saved_material_kg": 10.00,
         "materials": ["plastic", "copper", "steel"],
     },
     "tv": {
         "salvageable": True,
         "hazardous": True,
         "hazard_note": "LCD backlight may contain mercury",
-        "resale_value_usd": 20.00,
-        "material_value_usd": 5.00,
-        "recovery_cost_usd": 8.00,
+        "resale_value_usd": 75.00,
+        "material_value_usd": 15.00,
+        "recovery_cost_usd": 10.00,
         "co2_saved_direct_reuse_kg": 80.00,
-        "co2_saved_material_kg": 15.00,
+        "co2_saved_material_kg": 18.00,
         "materials": ["plastic", "copper", "rare_earths"],
     },
     "speaker": {
-        "salvageable": False,
+        "salvageable": True,
         "hazardous": False,
-        "resale_value_usd": 3.00,
-        "material_value_usd": 0.80,
-        "recovery_cost_usd": 1.50,
+        "resale_value_usd": 22.00,
+        "material_value_usd": 5.00,
+        "recovery_cost_usd": 3.00,
         "co2_saved_direct_reuse_kg": 1.00,
         "co2_saved_material_kg": 0.40,
         "materials": ["copper", "magnets", "plastic"],
     },
     "washing_machine": {
-        "salvageable": False,
+        "salvageable": True,
         "hazardous": False,
-        "resale_value_usd": 30.00,
-        "material_value_usd": 10.00,
+        "resale_value_usd": 90.00,
+        "material_value_usd": 25.00,
         "recovery_cost_usd": 15.00,
         "co2_saved_direct_reuse_kg": 100.00,
-        "co2_saved_material_kg": 20.00,
+        "co2_saved_material_kg": 25.00,
         "materials": ["steel", "copper", "plastic"],
     },
     "microwave": {
-        "salvageable": False,
+        "salvageable": True,
         "hazardous": True,
         "hazard_note": "Magnetron contains beryllium oxide",
-        "resale_value_usd": 10.00,
-        "material_value_usd": 3.00,
-        "recovery_cost_usd": 5.00,
-        "co2_saved_direct_reuse_kg": 15.00,
-        "co2_saved_material_kg": 5.00,
+        "resale_value_usd": 35.00,
+        "material_value_usd": 12.00,
+        "recovery_cost_usd": 6.00,
+        "co2_saved_direct_reuse_kg": 25.00,
+        "co2_saved_material_kg": 8.00,
         "materials": ["steel", "copper"],
     },
     "player": {
-        "salvageable": False,
+        "salvageable": True,
         "hazardous": False,
-        "resale_value_usd": 5.00,
-        "material_value_usd": 1.00,
-        "recovery_cost_usd": 2.00,
+        "resale_value_usd": 18.00,
+        "material_value_usd": 4.00,
+        "recovery_cost_usd": 3.00,
         "co2_saved_direct_reuse_kg": 3.00,
         "co2_saved_material_kg": 0.80,
         "materials": ["plastic", "copper"],
@@ -302,7 +302,7 @@ def _recommend_recovery(
         flags.append("hazardous_material")
 
     # ── Decision rules ────────────────────────────────────────────────────────
-    if not kb["salvageable"]:
+    if component == "battery" or (not kb.get("salvageable", True) and component != "battery"):
         route = "certified_recycling"
         value = kb["material_value_usd"]
         co2 = kb["co2_saved_material_kg"]
@@ -312,16 +312,18 @@ def _recommend_recovery(
         co2 = kb["co2_saved_direct_reuse_kg"]
     elif working is True and age_years is not None and age_years >= 5:
         route = "refurbishment"
-        value = kb["resale_value_usd"] * 0.6
+        # Dynamic age depreciation (minimum floor of 45% of resale value)
+        deprec = max(0.45, 0.70 - (age_years - 5) * 0.04)
+        value = kb["resale_value_usd"] * deprec
         co2 = kb["co2_saved_direct_reuse_kg"] * 0.7
-    elif working is False and kb["salvageable"]:
-        route = "material_recovery"
+    elif working is False:
+        route = "material_recovery" if kb.get("salvageable") else "certified_recycling"
         value = kb["material_value_usd"]
         co2 = kb["co2_saved_material_kg"]
     else:
-        # working unknown
+        # working unknown - balanced estimate between refurbished resale and scrap baseline
         route = "refurbishment"
-        value = kb["resale_value_usd"] * 0.5
+        value = kb["resale_value_usd"] * 0.55 + kb["material_value_usd"] * 0.45
         co2 = kb["co2_saved_direct_reuse_kg"] * 0.5
         flags.append("working_status_unknown")
 
@@ -329,6 +331,8 @@ def _recommend_recovery(
         "component": component,
         "route": route,
         "estimated_value_usd": round(value, 2),
+        "resale_value_usd": round(float(kb.get("resale_value_usd", 0.0)), 2),
+        "material_value_usd": round(float(kb.get("material_value_usd", 0.0)), 2),
         "co2_saved_kg": round(co2, 2),
         "hazardous": kb.get("hazardous", False),
         "hazard_note": kb.get("hazard_note"),
